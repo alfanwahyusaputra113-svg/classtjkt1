@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelas X TJKT</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:white;text-align:center;}
+nav{background:#111;padding:15px;}
+nav button{padding:8px 15px;border:none;background:#2563eb;color:white;border-radius:6px;cursor:pointer;}
+header{padding:60px;background:linear-gradient(135deg,#2563eb,#1e3a8a);}
+section{padding:40px 20px;}
+.editable{padding:5px;border-radius:5px;}
+.edit-mode{background:rgba(255,255,255,0.1);border:1px dashed yellow;}
+footer{padding:20px;background:#111;margin-top:40px;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<button onclick="login()">Mode Edit</button>
+</nav>
+
+<header>>
+<h1 class="editable" id="judul">Kelas X TJKT 1</h1>
+<p class="editable" id="tagline">Solid • Disiplin • Calon Network Engineer</p>
+</header>
+
+<section
+<h2>Tentang Kelas</h2>
+<p class="editable" id="tentang">Kelas X TJKT mempelajari dasar jaringan komputer dan teknologi digital.</p>
+</section>
+
+<section>
+<h2>Kontak</h2>
+<p class="editable" id="kontak">Email: kelastjkt@email.com</p>
+</section>
+
+<footer>
+© 2026 Kelas X TJKT 1
+</footer>
+
+<script>
+const TOKEN = "TJKT1";
+let editMode = false;
+
+// Load saved content
+document.querySelectorAll(".editable").forEach(el=>{
+if(localStorage.getItem(el.id)){
+el.innerHTML = localStorage.getItem(el.id);
+}
+});
+
+function login(){
+let input = prompt("Masukkan Token:");
+if(input === TOKEN){
+alert("Mode Edit Aktif");
+enableEdit();
+}else{
+alert("Token Salah");
+}
+}
+
+function enableEdit(){
+editMode = true;
+document.querySelectorAll(".editable").forEach(el=>{
+el.contentEditable = true;
+el.classList.add("edit-mode");
+
+el.addEventListener("input", ()=>{
+localStorage.setItem(el.id, el.innerHTML);
+});
+});
+}
+</script>
+
+</body>
+</html>
